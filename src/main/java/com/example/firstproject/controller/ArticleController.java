@@ -43,7 +43,7 @@ public class ArticleController {
         // System.out.println(saved.toString());
         log.info(saved.toString());
 
-        return "";
+        return "redirect:/articles/" + saved.getId();
     }
 
     @GetMapping("/articles/{id}")
@@ -70,5 +70,4 @@ public class ArticleController {
 
         // 3. 뷰 페이지 설정해준다.
        return "articles/index";  // >> articles/index.mustache로 이동된다
-    }
-}
+    }}
