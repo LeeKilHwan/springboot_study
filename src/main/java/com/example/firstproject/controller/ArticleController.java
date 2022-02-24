@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @Slf4j  // 로깅을 위한 어노테이션
@@ -70,4 +71,37 @@ public class ArticleController {
 
         // 3. 뷰 페이지 설정해준다.
        return "articles/index";  // >> articles/index.mustache로 이동된다
-    }}
+    }
+    @GetMapping("/articles/{id}/edit")
+    public String edit(@PathVariable Long id, Model model){
+        // (DB에 있는)수정할 데이터를 가져와야한다.
+        Article articleEntity = articleRepository.findById(id).orElse(null);
+
+        // 모델에 데이터를 등록해준다.
+        model.addAttribute("article",articleEntity);
+
+        // 수정하는 뷰 페이지 설정
+        return "articles/edit";
+    }
+
+    @PostMapping("/articles/update")
+    public String update(ArticleForm form) {
+        log.info(form.toString());
+
+        // 1. DTO를 Entity로 변환한다
+        Article articleEntity = form.toEntity();
+        log.info(articleEntity.toString());
+
+        // 2. Entity를 DB로 저장한다.
+        // 2-1 : DB에 기존 데이터를 가져온다.
+        Article target = articleRepository.findById(articleEntity.getId()).orElse(null);
+
+        // 2-2 : 기존 데이터에 값을 생신한다.
+        if (target != null) {
+            articleRepository.save(articleEntity);  // Entity가 DB로 갱신된다.
+        }
+
+        // 3. 수정 결과 페이지로 리다이렉트 한다.
+        return "redirect:/articles/" + articleEntity.getId();
+    }
+}
