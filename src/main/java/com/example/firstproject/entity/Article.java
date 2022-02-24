@@ -5,10 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity  // >> DB가 해당 객체를 인식 가능하게 된다.
 
@@ -18,7 +15,8 @@ import javax.persistence.Id;
 @Getter
 public class Article {
     @Id // 대표값을 지정! (주민등록번호 같은 것)  // 필드의 값이 같을 때 그것을 구별하기 위해 사용
-    @GeneratedValue  // 1, 2, 3, ... 자동 생성 어노테이션
+    @GeneratedValue(strategy = GenerationType.IDENTITY)  // 1, 2, 3, ... 자동 생성 어노테이션
+                                                //(strategy = GenerationType.IDENTITY) >>  DB가 id를 자동 생성해준다.
     private Long id;
 
     @Column
