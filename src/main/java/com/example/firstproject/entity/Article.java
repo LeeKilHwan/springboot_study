@@ -26,4 +26,15 @@ public class Article {
     private String content;
 
 
+    // API로 수정하는 경우 입력한 값만 수정하게 해주는 메소드
+    public void patch(Article article) {
+        if (article.title != null){
+            this.title = article.title;
+        }
+        if (article.content != null){
+            this.content = article.content;
+        }
+    }
+
+
 }
