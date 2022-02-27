@@ -72,7 +72,7 @@ public class ArticleService {
                 .map(dto -> dto.toEntity())
                 .collect(Collectors.toList());
 
-//        // >> 위의 stream문법이 원래 for문으로 작성하면 이렇게 생겼다.
+//        // >> 위의 stream문법이 원래 for문으로 작성하면 이렇게 생겼'다.'
 //        List<Article> articleList = new ArrayList<>();
 //        for (int i = 0; i < dtos.size(); i++){
 //            ArticleForm dto = dtos.get(i);
