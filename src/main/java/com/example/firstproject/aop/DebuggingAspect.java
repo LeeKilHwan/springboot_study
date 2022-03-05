@@ -15,7 +15,9 @@ public class DebuggingAspect {
 
     // 대상 메소드 선택 : CommentService #create()
 //    @Pointcut("execution(* com.example.firstproject.service.CommentService.create(..))")  >>  create()메소드에만 적용
-    @Pointcut("execution(* com.example.firstproject.service.CommentService.*(..))")       // >> * : 모든 메소드에 적
+
+    // 대상 메소드 선택 : api 패키지의 모든 메소드
+    @Pointcut("execution(* com.example.firstproject.api.*.*(..))")       // >> * : 모든 메소드에 적
     private void cut() {}
 
     //실행 시점을 설정 : cut()의 대상이 수행되기 이전
